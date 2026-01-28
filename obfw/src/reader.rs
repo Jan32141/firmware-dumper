@@ -45,7 +45,7 @@ impl<F: Read + Seek> DumpReader<F> {
         self.items
     }
 
-    pub fn next_item(&mut self) -> Result<Option<ItemReader<F>>, ReaderError> {
+    pub fn next_item(&mut self) -> Result<Option<ItemReader<'_, F>>, ReaderError> {
         // Read item type.
         let mut ty = 0u8;
 

@@ -29,7 +29,7 @@ impl<'a, F: Read> PartReader<'a, F> {
         &self.dev
     }
 
-    pub fn next_item(&mut self) -> Result<Option<PartData>, PartError> {
+    pub fn next_item(&mut self) -> Result<Option<PartData<'_>>, PartError> {
         // Read item type.
         let mut ty = 0;
 
@@ -61,7 +61,7 @@ impl<'a, F: Read> PartReader<'a, F> {
         })
     }
 
-    fn read_file(&mut self) -> Result<PartData, PartError> {
+    fn read_file(&mut self) -> Result<PartData<'_>, PartError> {
         // Read name and block type.
         let name = Self::read_str(self.dump)?;
         let mut btype = 0;
