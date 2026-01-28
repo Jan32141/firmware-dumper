@@ -9,12 +9,11 @@ args = [
     "cargo", "+nightly", "build",
     "--target", "x86_64-unknown-none",
     "-r",
-    "-Z", "build-std=alloc,core,panic_abort",
-    "-Z", "build-std-features=panic_immediate_abort",
+    "-Z", "build-std=alloc,core",
     "--message-format", "json-render-diagnostics"
 ]
 
-with Popen(args, cwd="dumper", env=dict(os.environ, RUSTFLAGS="--cfg fw=\"1100\""), stdout=PIPE) as proc:
+with Popen(args, cwd="dumper", env=dict(os.environ, RUSTFLAGS="--cfg fw=\"1100\" -Z unstable-options -C panic=immediate-abort"), stdout=PIPE) as proc:
     for line in proc.stdout:
         line = json.loads(line)
         reason = line["reason"]
