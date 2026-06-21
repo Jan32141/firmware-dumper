@@ -32,5 +32,5 @@ jobs:
     - name: Upload Payload
       uses: actions/upload-artifact@v4
       with:
-        name: firmware-dumper
-        path: firmware-dumper.bin
+        name: firmware-dumper2
+        path: firmware-dumper2.bin
